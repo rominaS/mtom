@@ -1,63 +1,77 @@
-html {overflow: -moz-scrollbars-vertical;}
+(function () {
+    "use strict";
 
-body {
-    
-        background-image: url("/media/moonday.jpg");
-        background-color: #cccccc;
-    
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	color: #3C3D3F;
-    text-align: left;
-    max-width: 800px;
-    margin: auto;
-}
+    window.addEventListener('load', function () {
 
-header{
-    display:flex;
-    margin-top:36px;
-    height: 64px;
-    justify-content:flex-end;
-}
+        api.onError(function (err) {
+            console.error("[error]", err);
+        });
 
-header #title{
-    color: black;
-    text-decoration:none;
-    margin: 0px;
-    width:100%;
-    font-size:48px;
-}
+        api.onError(function (err) {
+            var error_box = document.querySelector('#error_box');
+            error_box.innerHTML = err;
+            error_box.style.visibility = "visible";
+        });
 
-.header_btn{
-    text-decoration:none;
-    font-size: 16px;
-    margin-left:5px;
-    margin-right:5px;
-}
+        api.onUserUpdate(function (username) {
+            if (username) window.location.href = '/';
+        });
 
-#close_button{
-    background-image: url('../media/close33.png');
-}
+        function submit() {
+            console.log(document.querySelector("form").checkValidity());
+            if (document.querySelector("form").checkValidity()) {
+                var username = document.querySelector("form [name=username]").value;
+                var password = document.querySelector("form [name=password]").value;
+                var action = document.querySelector("form [name=action]").value;
+                api[action](username, password, function (err) {
+                    if (err) document.querySelector('.error_box').innerHTML = err;
+                });
+            }
+        }
+        function check_pass() {
+            var val = document.querySelector("form [name=password]").value;
+            var no = 0;
+            if (val != "") {
+                // If the password length is less than or equal to 6
+                if (val.length <= 8) no = 1;
+                // If the password length is greater than 6 and contain any lowercase alphabet or any number 
+                if (val.length > 8 && (val.match(/[a-z]/) || val.match(/\d+/))) no = 2;
+                // If the password length is greater than 6 and contain alphabet and number respectively
+                if (val.length > 8 && ((val.match(/[a-z]/) && val.match(/\d+/)) || (val.match(/\d+/) && val.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)) || (val.match(/[a-z]/)))) no = 3;
+                // If the password length is greater than 6 and must contain alphabets and numbers and special characters
+                if (val.length > 8 && val.match(/[a-z]/) && val.match(/\d+/)) no = 4;
+            }
+            if (no < 3) { //not good enough
+                alert("password strength not okay");
+                return false;
+            }
+            else {
+                alert("password strength okay");
+                return true;
+            }
+        }
 
-footer{
-    margin-top: 20px;
-    text-align:center;
-}
+        document.querySelector('#signin').addEventListener('click', function (e) {
+            document.querySelector("form [name=action]").value = 'signin';
+            submit();
+            //window.location.href = "/api/messages/";
 
-.alert{
-    color: red;
-}
+        });
 
-.hidden{
-    visibility: hidden;
-}
+        document.querySelector('#signup').addEventListener('click', function (e) {
+            document.querySelector("form [name=action]").value = 'signup';
+            if (check_pass() == true) {
+                //alert("true");
+                submit();
+            }
 
 
-#error_box{
-    color: red;
-    visibility:hidden;
-}
+        });
 
-#error_box::before { 
-  content: "Error: ";
-}
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+    });
+}());
+
+
