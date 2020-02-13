@@ -1,39 +1,67 @@
-html {overflow: -moz-scrollbars-vertical;}
-
+/* html {overflow: -moz-scrollbars-vertical;} */
+html, body {
+    height: 100%;
+    margin: 2px;
+}
 body {
     
-        background-image: url("/media/moonday.jpg");
-        background-color: #cccccc;
+        /* background-image: url("/media/moonday.jpg"); */
+    background-color: #00027c;
     
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	color: #3C3D3F;
+    
+    max-width: 800px; *//* 
+    margin: auto; */
+    font-family: "Courier New", Courier, monospace;
+    font-size: 24px;
+    letter-spacing: -1.8px;
+    word-spacing: -1.8px;
+    color: #FFFFFF;
+    font-weight: normal;
+    font-style: normal;
     text-align: left;
-    max-width: 800px;
-    margin: auto;
 }
 
 header{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 24px;
+    letter-spacing: -1.8px;
+    word-spacing: -1.8px;
+    color: #FFFFFF;
+    width:100%;
     display:flex;
     margin-top:36px;
-    height: 64px;
+    height: 120px;
     justify-content:flex-end;
 }
 
 header #title{
-    color: black;
+    color: white;
     text-decoration:none;
-    margin: 0px;
+    margin: 15px;
     width:100%;
-    font-size:48px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 28px;
+    letter-spacing: -1.8px;
+    word-spacing: -1.8px;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
 }
 
 .header_btn{
     text-decoration:none;
+    color: white;
     font-size: 16px;
-    margin-left:5px;
-    margin-right:5px;
+    height: 50px;
+    width: 300px;
+    margin-left:1px;
+    margin-right:1px;
 }
+
 
 #close_button{
     background-image: url('../media/close33.png');
@@ -60,4 +88,67 @@ footer{
 
 #error_box::before { 
   content: "Error: ";
+}
+
+ .grid-container {
+    display: grid;
+    width: 50%;
+    grid-template-columns:250px 100px 5px 250px 100px 5px 250px 100px;
+    grid-template-rows: 10px 100px 100px 10px 100px 100px 10px 100px 100px 10px;
+    grid-template-areas: "Header Header Header Header Header Header Header Header" "m1 m1 . m2 m2 . m3 m3" "m1 m1 . m2 m2 . m3 m3" ". . moon moon moon moon . ." "m4 m4 moon moon moon moon m5 m5" "m4 m4 moon moon moon moon m5 m5" ". . moon moon moon moon . ." "m6 m6 . m7 m7 . m8 m8" "m6 m6 . m7 m7 . m8 m8" "foot foot foot foot foot foot foot foot";
+  }
+  
+  .Header { background-color: whitesmoke; grid-area: Header; }
+  
+  .m1 { width:50%;grid-area: m1; }
+  
+  .m2 { width:50%;grid-area: m2; }
+  
+  .m3 {width:50%;grid-area: m3; }
+
+  .m4 {width:50%; grid-area: m4; }
+  
+  .moon { 
+      width:50%;
+  grid-area: moon; }
+  
+  .m5 { width:50%;grid-area: m5; }
+  
+  .m6 { width:50%;grid-area: m6; }
+  
+  .m7 { width:50%;grid-area: m7; }
+  
+  .m8 { width:50%;grid-area: m8; }
+  
+  .foot {background-color: whitesmoke;
+    grid-area: foot; }
+/*     .grid-container {
+        display: grid;
+        height: 100%;
+        grid-template-columns: 320px 320px 320px;
+        grid-template-rows: 100px 100px 100px;
+        grid-template-areas: "m1 m2 m3" "m4 moon m5" "m6 m7 m8";
+      }
+      
+      .m1 {grid-area: m1; }
+      
+      .m2 {grid-area: m2; }
+      
+      .m3 {grid-area: m3; }
+      
+      .m4 { grid-area: m4; }
+      
+      .moon { grid-area: moon; }
+      
+      .m5 {grid-area: m5; }
+      
+      .m6 {grid-area: m6; }
+      
+      .m7 { grid-area: m7; }
+      
+      .m8 {grid-area: m8; } */
+
+img{
+    width: 300px;
+    height: 300px;
 }

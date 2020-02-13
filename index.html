@@ -12,23 +12,40 @@
 <body>
     <header>
         <a href="/" id="title">Messages to our Moon</a>
-        <a href="./login.html" id="signin_button" class="btn header_btn hidden">Sign in or Sign up</a>
-        <a href="/signout/" id="signout_button" class="btn header_btn hidden">Sign out</a>
+        <a href="/sendmessage.html" class="header_btn">send a message</a>
+        <a href="./login.html" id="signin_button" class="header_btn hidden">Sign in or Sign up</a>
+        <a href="/signout/" id="signout_button" class="header_btn hidden">Sign out</a>
+        <p id="error_box"></p>
     </header>
 
-    <p id="error_box"></p>
 
-    <form class="complex_form hidden" id="create_message_form">
-        <textarea rows="5" id="post_content" class="form_element" placeholder="Enter your message" required></textarea>
-        <button type="submit" class="btn">Post your message</button>
-    </form>
 
-    <div id="messages" class="box top left"></div>
-    <div id="messages2" class="box top right"></div>
+
+    <!--     <div id="messages" class="box top left"></div>
+ -->
+    <!-- <div id="messages2" class="box top right"></div>
     <div id="messages3" class="box bottom left"></div>
     <div id="messages4" class="box bottom right"></div>
+ -->
 
 
+    <div class="grid-container">
+        <div id="messages" class="m1"></div>
+        <div id="messages2" class="m2"></div>
+        <div id="messages3" class="m3"></div>
+        <div id="messages4" class="m4"></div>
+        <div class="moon">
+            <img src="/media/moon.png">
+        </div>
+        <div id="messages5" class="m5"></div>
+        <div id="messages6" class="m6"></div>
+        <div id="messages7" class="m7"></div>
+        <div id="messages8" class="m8"></div>
+    </div>
+    <form class="complex_form hidden" id="create_message_form">
+        <textarea rows="1" id="post_content" class="form_element" placeholder="Enter your message" required></textarea>
+        <button type="submit" class="btn">Post your message</button>
+    </form>
     <footer>
         <a href='./credits.html'>credits</a>
     </footer>
