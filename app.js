@@ -25,10 +25,10 @@ const cookie = require('cookie');
 
 const session = require('express-session');
 app.use(session({
-    secret: 'this has been modified for public viewing',
+    secret: 'mylonglonglongsecretisworth$525$',
     resave: false,
     saveUninitialized: true,
-    cookie: { httpOnly: true, sameSite: true, secure: true }
+    cookie: { httpOnly: true, sameSite: true, secure: true } //cookie flags
 }));
 
 function generateSalt() {
@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
     res.setHeader('Set-Cookie', cookie.serialize('username', username, {
         path: '/',
         maxAge: 60 * 60 * 24 * 7, // 1 week in number of seconds
-        //httpOnly: true,
+        httpOnly: true,
         sameSite: true,
         secure: true
     }));
@@ -67,22 +67,22 @@ var isAuthenticated = function (req, res, next) {
 
 //Functions to validate the input
 var checkUsername = function (req, res, next) {
-    if (!validator.isAlphanumeric(req.body.username)) return res.status(400).end("bad input");
+    if (!validator.isAlphanumeric(req.body.username)) return res.status(400).end("user name not alphanumeric");
     next();
 };
 
 var checkPassword = function (req, res, next) {
-    if (!validator.isAlphanumeric(req.body.password)) return res.status(400).end("bad input");
+    if (!validator.isLength(req.body.password, { min: 8 })) return res.status(400).end("password not long enough");
     next();
 };
 
 var sanitizeContent = function (req, res, next) {
     req.body.content = validator.escape(req.body.content);
     next();
-}
+};
 
 var checkId = function (req, res, next) {
-    if (!validator.isAlphanumeric(req.params.id)) return res.status(400).end("bad input");
+    if (!validator.isAlphanumeric(req.params.id)) return res.status(400).end("id not alphanumeric");
     next();
 };
 // curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alice"}' -c cookie.txt localhost:3000/signup/
@@ -141,7 +141,7 @@ app.post('/api/messages/', sanitizeContent, isAuthenticated, function (req, res,
 
 // curl -b cookie.txt localhost:3000/api/messages/
 app.get('/api/messages/', function (req, res, next) {
-    messages.find({}).sort({ createdAt: -1 }).limit(5).exec(function (err, messages) {
+    messages.find({}).sort({ createdAt: -1 }).limit(8).exec(function (err, messages) {
         if (err) return res.status(500).end(err);
         return res.json(messages.reverse());
     });
